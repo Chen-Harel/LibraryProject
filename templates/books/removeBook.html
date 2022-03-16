@@ -1,0 +1,26 @@
+{%extends 'layout.html'%}
+{%block header%}{{super()}}{%endblock%}
+{%block content%}
+
+<h1 class="pushLeft">You can remove a book from here</h1>
+<div class="pushLeft">
+    <form action="/books/showAllBooks" method="POST">
+        <label>Book name:</label>
+        <br>
+        <input type="text" name="bName">
+        <br><br>
+        <label>Author:</label>
+        <br>
+        <input type="text" name="bAuthor">
+        <br><br>
+        <label>Year Published:</label>
+        <br>
+        <input type="number" name="bYear">
+        <br><br>
+        <button type="reset">Reset</button>
+        <button type="submit">Remove</button>
+    </form>
+</div>
+
+{%endblock%}
+{%block footer%}{{super()}}{%endblock%}

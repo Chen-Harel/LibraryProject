@@ -1,0 +1,25 @@
+{%extends 'layout.html'%}
+{%block header%}{{super()}}{%endblock%}
+{%block content%}
+
+<h1 class="pushLeft">You can find a book from here</h1>
+
+<div class="pushLeft">
+    <form action="/books/findBook" method="POST">
+        <label>Book Name:</label>
+        <br>
+        <input type="text" name="bookName">
+        <br><br>
+        <label>Book Author:</label>
+        <br>
+        <input type="text" name="bookAuthor">
+        <button type="Submit">Find my book!</button>
+    </form>
+
+    {{books}}
+
+    {{findbook}}
+</div>
+
+{%endblock%}
+{%block footer%}{{super()}}{%endblock%}

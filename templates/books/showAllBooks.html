@@ -1,0 +1,17 @@
+{%extends 'layout.html'%}
+{%block header%}{{super()}}{%endblock%}
+{%block content%}
+
+<h1 class="pushLeft">You can view all books from here</h1>
+
+<div class="pushLeft">
+    {% for i in books %}
+    <li>{{i}}</li>
+    {% endfor %}
+</div>
+
+
+
+
+{%endblock%}
+{%block footer%}{{super()}}{%endblock%}
