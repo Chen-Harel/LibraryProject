@@ -4,7 +4,7 @@
 
 <h1 class="pushLeft">You can remove a book from here</h1>
 <div class="pushLeft">
-    <form action="/books/showAllBooks" method="POST">
+    <form action="/books/removeBook" method="POST">
         <label>Book name:</label>
         <br>
         <input type="text" name="bName">
@@ -21,6 +21,9 @@
         <button type="submit">Remove</button>
     </form>
 </div>
-
+<br><br>
+<div class="pushLeft">
+    {{bRem}}&nbsp;<a href="/books/showAllBooks">{{goToBookDatabase}}</a> {{goBack}}
+</div>
 {%endblock%}
 {%block footer%}{{super()}}{%endblock%}

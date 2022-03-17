@@ -16,9 +16,10 @@
         <button type="Submit">Find my book!</button>
     </form>
 
-    {{books}}
-
-    {{findbook}}
+    <h1>The book you want is: </h1>
+    {%for i in books%}
+    <li>{{books}}</li>
+    {%endfor%}
 </div>
 
 {%endblock%}

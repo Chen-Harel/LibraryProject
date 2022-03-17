@@ -7,8 +7,10 @@ cur=con.cursor()
 def initDB():
     try:
         cur.execute("CREATE TABLE books (bookName text, Author text, yearPublished int, bookType int)")
+        cur.execute("CREATE TABLE customers (cusName text, cusCity text, cusAge int)")
+        cur.execute("CREATE TABLE loans (cusID int, bookID int, loanDate int, returnDate int)")
     except:
-        print("Table exists.")
+        print("All tables exist.")
 
     con.commit()
 initDB()
@@ -35,7 +37,7 @@ def addBook():
 #Show returned books page
 @app.route("/books/returnBook")
 def returnBook():
-    return render_template("/loans/returnBook.html")
+    return render_template("/books/returnBook.html")
 
 #Show all books page
 @app.route("/books/showAllBooks", methods=['GET', 'POST'])
@@ -53,7 +55,7 @@ def findBook():
     if request.method=='POST':
         bookName = request.form.get('bookName')
         bookAuthor=request.form.get('bookAuthor')
-        sql = (f"select * from books where bookName='{bookName}' and Author='{bookAuthor}'")
+        sql = (f"select * from books where bookName like '%{bookName}%' and Author like '%{bookAuthor}%'")
         cur.execute(sql)
         books = cur.fetchall()
         return render_template("/books/findBook.html", books=books)
@@ -62,6 +64,17 @@ def findBook():
 #Remove book from database
 @app.route("/books/removeBook", methods=['GET', 'POST'])
 def removeBook():
+    if request.method=='POST':
+        bName=request.form.get('bName')
+        bAuthor=request.form.get('bAuthor')
+        bYear=request.form.get('bYear')
+        sql=(f"DELETE FROM books where bookName='{bName}' and Author='{bAuthor}' and yearPublished='{int(bYear)}'")
+        cur.execute(sql)
+        con.commit()
+        bRem="Book removed!"
+        goToBookDatabase="Click here"
+        goBack="to go back."   
+        return render_template("/books/removeBook.html", bRem=bRem, goToBookDatabase=goToBookDatabase, goBack=goBack)
     return render_template("/books/removeBook.html")
 
 #Add a customer page
@@ -87,7 +100,7 @@ def findCustomer():
 #Loan book page
 @app.route("/loans/loanBook")
 def loanBook():
-    return render_template("loanBook.html")
+    return render_template("/loans/loanBook.html")
 
 #Show all loaned books
 @app.route("/loans/showAllLoans")
