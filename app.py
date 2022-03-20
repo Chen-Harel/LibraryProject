@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request
 import sqlite3
+import tools.books as myBooks
+
 
 con=sqlite3.connect("library.db", check_same_thread=False)
 cur=con.cursor()
@@ -25,13 +27,7 @@ def index():
 #Add book page
 @app.route("/books/addBook", methods=['GET', 'POST'])
 def addBook():
-    if request.method=='POST':
-        bName = request.form.get('bookName')
-        bAuthor = request.form.get('Author')
-        bYear = request.form.get('yearPublished')
-        bType = request.form.get('bookType')
-        cur.execute(f"INSERT INTO books VALUES('{bName}', '{bAuthor}', {int(bYear)}, {int(bType)})")
-        con.commit()
+    myBooks.Book.addBook(myBooks)
     return render_template("/books/addBook.html")
 
 #Show returned books page
@@ -42,12 +38,7 @@ def returnBook():
 #Show all books page
 @app.route("/books/showAllBooks", methods=['GET', 'POST'])
 def showAllBooks():
-    if request.method=='POST':
-        pass
-    sqlBooks = "SELECT * FROM books"
-    cur.execute(sqlBooks)
-    books = cur.fetchall()
-    return render_template('/books/showAllBooks.html', books=books)
+    myBooks.Book.showAllBooks(myBooks)
 
 #Find specific book page
 @app.route("/books/findBook", methods=['GET','POST'])
@@ -78,12 +69,13 @@ def removeBook():
     return render_template("/books/removeBook.html")
 
 #Add a customer page
-@app.route("/customers/addCustomer")
+@app.route("/customers/addCustomer", methods=['GET', 'POST'])
 def addCustomer():
+
     return render_template("/customers/addCustomer.html")
 
 #Remove a customer page
-@app.route("/customers/removeCustomer")
+@app.route("/customers/removeCustomer", methods=['GET', 'POST'])
 def removeCustomer():
     return render_template("/customers/removeCustomer.html")
 
@@ -93,7 +85,7 @@ def showAllCustomers():
     return render_template("/customers/showAllCustomers.html")
 
 #Find specific customer page
-@app.route("/customers/findCustomer")
+@app.route("/customers/findCustomer", methods=['GET', 'POST'])
 def findCustomer():
     return render_template("/customers/findCustomer.html")
 
