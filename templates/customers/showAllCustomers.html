@@ -2,24 +2,23 @@
 {%block header%}{{super()}}{%endblock%}
 {%block content%}
 
-<h1 class="pushLeft">Show customers from here</h1>
-<div class="pushLeft">
-    {%for customer in customers%}
-    <li>{{customer}}</li>
-    {%endfor%}
-</div>
-
+<h1 class="pushLeft">Show all customers from here</h1>
 <div class="pushLeft">
     <table>
         <tr>
             <th>customerID</th>
-            <th>cusName</th>
-            <th>cusCity</th>
-            <th>cusAge</th>
+            <th>custName</th>
+            <th>custCity</th>
+            <th>custAge</th>
         </tr>
-        <tr>
-            <td></td>
-        </tr>
+    {%for customer in customers%}
+    <tr>
+        <td>{{customer[0]}}</td>
+        <td>{{customer[1]}}</td>
+        <td>{{customer[2]}}</td>
+        <td>{{customer[3]}}</td>
+    </tr>
+    {%endfor%}
     </table>
 </div>
 
