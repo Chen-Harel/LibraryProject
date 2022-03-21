@@ -3,6 +3,11 @@
 {%block content%}
 
 <h1 class="pushLeft">Show customers from here</h1>
+<div class="pushLeft">
+    {%for customer in customers%}
+    <li>{{customer}}</li>
+    {%endfor%}
+</div>
 
 {%endblock%}
 {%block footer%}{{super()}}{%endblock%}

@@ -7,15 +7,15 @@
     <form action="/books/removeBook" method="POST">
         <label>Book name:</label>
         <br>
-        <input type="text" name="bName">
+        <input type="text" name="bName" required autofocus>
         <br><br>
         <label>Author:</label>
         <br>
-        <input type="text" name="bAuthor">
+        <input type="text" name="bAuthor" required autofocus>
         <br><br>
         <label>Year Published:</label>
         <br>
-        <input type="number" name="bYear">
+        <input type="number" name="bYear" min="1" max="9999">
         <br><br>
         <button type="reset">Reset</button>
         <button type="submit">Remove</button>

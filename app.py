@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 import sqlite3
 import tools.books as myBooks
+import tools.customers as myCustomers
+
 
 
 con=sqlite3.connect("library.db", check_same_thread=False)
@@ -27,8 +29,8 @@ def index():
 #Add book page
 @app.route("/books/addBook", methods=['GET', 'POST'])
 def addBook():
-    myBooks.Book.addBook(myBooks)
-    return render_template("/books/addBook.html")
+    return myBooks.Book.addBook(myBooks)
+    
 
 #Show returned books page
 @app.route("/books/returnBook")
@@ -38,51 +40,32 @@ def returnBook():
 #Show all books page
 @app.route("/books/showAllBooks", methods=['GET', 'POST'])
 def showAllBooks():
-    myBooks.Book.showAllBooks(myBooks)
+    return myBooks.Book.showAllBooks(myBooks)
 
 #Find specific book page
 @app.route("/books/findBook", methods=['GET','POST'])
 def findBook():
-    if request.method=='POST':
-        bookName = request.form.get('bookName')
-        bookAuthor=request.form.get('bookAuthor')
-        sql = (f"select * from books where bookName like '%{bookName}%' and Author like '%{bookAuthor}%'")
-        cur.execute(sql)
-        books = cur.fetchall()
-        return render_template("/books/findBook.html", books=books)
-    return render_template("/books/findBook.html")
+    return myBooks.Book.findBook(myBooks)
 
 #Remove book from database
 @app.route("/books/removeBook", methods=['GET', 'POST'])
 def removeBook():
-    if request.method=='POST':
-        bName=request.form.get('bName')
-        bAuthor=request.form.get('bAuthor')
-        bYear=request.form.get('bYear')
-        sql=(f"DELETE FROM books where bookName='{bName}' and Author='{bAuthor}' and yearPublished='{int(bYear)}'")
-        cur.execute(sql)
-        con.commit()
-        bRem="Book removed!"
-        goToBookDatabase="Click here"
-        goBack="to go back."   
-        return render_template("/books/removeBook.html", bRem=bRem, goToBookDatabase=goToBookDatabase, goBack=goBack)
-    return render_template("/books/removeBook.html")
+    return myBooks.Book.removeBook(myBooks)
 
 #Add a customer page
 @app.route("/customers/addCustomer", methods=['GET', 'POST'])
 def addCustomer():
-
-    return render_template("/customers/addCustomer.html")
+    return myCustomers.Customer.addCustomer(myCustomers)
 
 #Remove a customer page
 @app.route("/customers/removeCustomer", methods=['GET', 'POST'])
 def removeCustomer():
-    return render_template("/customers/removeCustomer.html")
+    return myCustomers.Customer.removeCustomer(myCustomers)
 
 #Show all customers page
-@app.route("/customers/showAllCustomers")
+@app.route("/customers/showAllCustomers", methods=['GET', 'POST'])
 def showAllCustomers():
-    return render_template("/customers/showAllCustomers.html")
+    return myCustomers.Customer.showAllCustomers(myCustomers)
 
 #Find specific customer page
 @app.route("/customers/findCustomer", methods=['GET', 'POST'])

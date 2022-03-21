@@ -4,5 +4,27 @@
 
 <h1 class="pushLeft">Remove customer from here</h1>
 
+<div class="pushLeft">
+    <form action="/customers/removeCustomer" method="POST">
+        <label>Customer name:</label>
+        <br>
+        <input type="text" name="custName" required>
+        <br><br>
+        <label>City:</label>
+        <br>
+        <input type="text" name="custCity">
+        <br><br>
+        <label>Age:</label>
+        <br>
+        <input type="number" min="1" name="custAge">
+        <br><br>
+        <button type="submit">Remove</button>
+    </form>
+</div>
+<br>
+<div class="pushLeft">
+    {{cRem}}&nbsp;<a href="/customers/showAllCustomers">{{goToBookDatabase}}</a> {{goBack}}
+</div>
+
 {%endblock%}
 {%block footer%}{{super()}}{%endblock%}
