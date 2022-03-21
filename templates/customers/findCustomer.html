@@ -4,5 +4,25 @@
 
 <h1 class="pushLeft">Find customers from here</h1>
 
+<div class="pushLeft">
+    <form action="/customers/findCustomer" method="POST">
+        <label>Customer name:</label>
+        <br>
+        <input type="text" name="custName" required autofocus>
+        <br><br>
+        <label>City:</label>
+        <br>
+        <input type="text" name="custCity">
+        <br><br>
+        <button type="submit">Find!</button>
+    </form>
+</div>
+<br><br>
+<div class="pushLeft">
+    {%for i in cust%}
+    {{cust}}
+    {%endfor%}
+</div>
+
 {%endblock%}
 {%block footer%}{{super()}}{%endblock%}

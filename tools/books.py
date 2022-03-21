@@ -15,7 +15,7 @@ class Book:
             bAuthor = request.form.get('Author')
             bYear = request.form.get('yearPublished')
             bType = request.form.get('bookType')
-            cur.execute(f'''INSERT INTO books VALUES("{bName}", "{bAuthor}", {int(bYear)}, {int(bType)})''')
+            cur.execute(f'''INSERT INTO books VALUES(not null,"{bName}", "{bAuthor}", {int(bYear)}, {int(bType)})''')
             con.commit()
         return render_template("/books/addBook.html")
 
@@ -31,7 +31,7 @@ class Book:
         if request.method=='POST':
             bookName = request.form.get('bookName')
             bookAuthor=request.form.get('bookAuthor')
-            sql = (f"select * from books where bookName like '%{bookName}%' and Author like '%{bookAuthor}%'")
+            sql = (f'''select * from books where bookName like "%{bookName}%" and Author like "%{bookAuthor}%"''')
             cur.execute(sql)
             books = cur.fetchall()
             return render_template("/books/findBook.html", books=books)

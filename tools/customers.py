@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import redirect, render_template, request
 import sqlite3
 
 
@@ -22,7 +22,7 @@ class Customer:
             custName = request.form.get('custName')
             custCity = request.form.get('custCity')
             custAge = request.form.get('custAge')
-            cur.execute(f'''INSERT INTO customers VALUES("{custName}", "{custCity}", {int(custAge)})''')
+            cur.execute(f'''INSERT INTO customers VALUES(not null, "{custName}", "{custCity}", {int(custAge)})''')
             con.commit()
         return render_template("/customers/addCustomer.html")
     
@@ -37,5 +37,15 @@ class Customer:
             cRem="Customer removed!"
             goToBookDatabase="Click here"
             goBack="to go back."
-            return render_template("/customers/removeCustomer.html", cRem=cRem, goToBookDatabase=goToBookDatabase, goBack=goBack)
+            return redirect("/customers/removeCustomer.html", cRem=cRem, goToBookDatabase=goToBookDatabase, goBack=goBack)
         return render_template("/customers/removeCustomer.html")
+    
+    def findCustomer(self):
+        if request.method=="POST":
+            custName=request.form.get("custName")
+            custCity=request.form.get("custCity")
+            findCust = (f'''SELECT * FROM customers where cusName like "%{custName}%" and cusCity like "%{custCity}%"''')
+            cur.execute(findCust)
+            cust = cur.fetchall()
+            return render_template("/customers/findCustomer.html", cust=cust)
+        return render_template("/customers/findCustomer.html")

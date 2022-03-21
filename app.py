@@ -3,18 +3,16 @@ import sqlite3
 import tools.books as myBooks
 import tools.customers as myCustomers
 
-
-
 con=sqlite3.connect("library.db", check_same_thread=False)
 cur=con.cursor()
 
 def initDB():
     try:
-        cur.execute("CREATE TABLE books (bookName text, Author text, yearPublished int, bookType int)")
-        cur.execute("CREATE TABLE customers (cusName text, cusCity text, cusAge int)")
+        cur.execute("CREATE TABLE books (bookID INTEGER PRIMARY KEY AUTOINCREMENT, bookName text, Author text, yearPublished int, bookType int)")
+        cur.execute("CREATE TABLE customers (customerID INTEGER PRIMARY KEY AUTOINCREMENT, cusName text, cusCity text, cusAge int)")
         cur.execute("CREATE TABLE loans (cusID int, bookID int, loanDate int, returnDate int)")
     except:
-        print("All tables exist.")
+        print("All tables loaded")
 
     con.commit()
 initDB()
@@ -70,7 +68,7 @@ def showAllCustomers():
 #Find specific customer page
 @app.route("/customers/findCustomer", methods=['GET', 'POST'])
 def findCustomer():
-    return render_template("/customers/findCustomer.html")
+    return myCustomers.Customer.findCustomer(myCustomers)
 
 #Loan book page
 @app.route("/loans/loanBook")
