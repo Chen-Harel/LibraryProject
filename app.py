@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import sqlite3
 import tools.books as myBooks
 import tools.customers as myCustomers
+import tools.loans as myLoans
 
 con=sqlite3.connect("library.db", check_same_thread=False)
 cur=con.cursor()
@@ -31,9 +32,9 @@ def addBook():
     
 
 #Show returned books page
-@app.route("/books/returnBook")
+@app.route("/books/returnBook", methods=['GET', 'POST'])
 def returnBook():
-    return render_template("/books/returnBook.html")
+    return myLoans.Loan.returnBook(myLoans)
 
 #Show all books page
 @app.route("/books/showAllBooks", methods=['GET', 'POST'])
@@ -71,19 +72,25 @@ def findCustomer():
     return myCustomers.Customer.findCustomer(myCustomers)
 
 #Loan book page
-@app.route("/loans/loanBook")
+@app.route("/loans/loanBook", methods=['GET', 'POST'])
 def loanBook():
-    return render_template("/loans/loanBook.html")
+    return myLoans.Loan.loanBook(myLoans)
 
 #Show all loaned books
-@app.route("/loans/showAllLoans")
+@app.route("/loans/showAllLoans", methods=['GET', 'POST'])
 def showAllLoans():
-    return render_template("/loans/showAllLoans.html")
+    if request.method=="POST":
+        pass
+    findAllLoans = '''SELECT * FROM loans'''
+    cur.execute(findAllLoans)
+    allLoans = cur.fetchall()
+    return render_template("/loans/showAllLoans.html", allLoans=allLoans)
 
 #Show all LATE loans
 @app.route("/loans/showAllLateLoans")
 def showAllLateLoans():
     return render_template("/loans/showAllLateLoans.html")
+
 
 if __name__=="__main__":
     app.run(debug=True)

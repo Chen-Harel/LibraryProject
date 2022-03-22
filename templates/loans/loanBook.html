@@ -3,6 +3,27 @@
 {%block content%}
 
 <h1 class="pushLeft">Loan a book from here</h1>
+<div>
+    <form action="/loans/loanBook" method="POST">
+        <label>Book name:</label>
+        <br>
+        <input type="text" name="bookName" required autofocus>
+        <br><br>
+        <label>Customer name:</label>
+        <br>
+        <input type="text" name="customerName" required>
+        <br><br>
+        <label>Loan date:</label>
+        <br>
+        <input type="date" name="loanDate" required>
+        <br><br>
+        <label>Return date:</label>
+        <br>
+        <input type="date" name="expectedReturn" required>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
 
 {%endblock%}
 {%block footer%}{{super()}}{%endblock%}

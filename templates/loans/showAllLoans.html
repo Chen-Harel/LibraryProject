@@ -4,5 +4,23 @@
 
 <h1 class="pushLeft">Show all loans from here</h1>
 
+<div class="pushLeft">
+    <table>
+        <tr>
+            <th>custID</th>
+            <th>bookID</th>
+            <th>loanDate</th>
+            <th>returnDate</th>
+        </tr>
+        {%for loan in allLoans%}
+        <tr>
+            <td>{{loan[0]}}</td>
+            <td>{{loan[1]}}</td>
+            <td>{{loan[2]}}</td>
+            <td>{{loan[3]}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+</div>
 {%endblock%}
 {%block footer%}{{super()}}{%endblock%}

@@ -4,5 +4,19 @@
 
 <h1 class="pushLeft">You can return a book from here</h1>
 
+<div class="pushLeft">
+    <form action="/books/returnBook" method="POST">
+        <label>Customer name:</label>
+        <br>
+        <input type="text" required autofocus>
+        <br><br>
+        <label>Book name:</label>
+        <br>
+        <input type="text" required>
+        <br><br>
+        <button type="submit">Return book</button>
+    </form>
+</div>
+
 {%endblock%}
 {%block footer%}{{super()}}{%endblock%}
