@@ -18,10 +18,24 @@
     </form>
 </div>
 <br><br>
+
 <div class="pushLeft">
-    {%for i in cust%}
-    {{cust}}
-    {%endfor%}
+    <table>
+        <tr>
+            <th>customerID</th>
+            <th>custName</th>
+            <th>custCity</th>
+            <th>custAge</th>
+        </tr>
+        {%for customer in cust%}
+        <tr>
+            <td>{{customer[0]}}</td>
+            <td>{{customer[1]}}</td>
+            <td>{{customer[2]}}</td>
+            <td>{{customer[3]}}</td>
+        </tr>
+        {%endfor%}
+    </table>
 </div>
 
 {%endblock%}
