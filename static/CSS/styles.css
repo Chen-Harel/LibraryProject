@@ -33,6 +33,14 @@ body {
   margin-left: 30px;
 }
 
+.indexNav a{
+  color: black;
+}
+
+.indexNav a:hover{
+  color: #5F7464;
+}
+
 /* Table CSS */
 table, th, td{
   border: 1px solid;
