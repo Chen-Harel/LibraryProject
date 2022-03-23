@@ -9,14 +9,27 @@ cur=con.cursor()
 
 def initDB():
     try:
-        cur.execute("CREATE TABLE books (bookID INTEGER PRIMARY KEY AUTOINCREMENT, bookName text, Author text, yearPublished int, bookType int)")
+        cur.execute("CREATE TABLE books (bookID INTEGER PRIMARY KEY AUTOINCREMENT, bookName text, Author text, yearPublished int, bookType int, isLoaned text)")
         cur.execute("CREATE TABLE customers (customerID INTEGER PRIMARY KEY AUTOINCREMENT, cusName text, cusCity text, cusAge int)")
         cur.execute("CREATE TABLE loans (cusID int, bookID int, loanDate int, returnDate int)")
     except:
         print("All tables loaded")
-
     con.commit()
 initDB()
+
+def addData():
+    cur.execute('''INSERT INTO books VALUES(not null, "Harry Potter and the Sorcerers Stone", "JK Rowling", 1998, 1, "No")''')
+    cur.execute('''INSERT INTO books VALUES(not null, "Harry Potter and the Chamber of Secrets", "JK Rowling", 1998, 3, "No")''')
+    cur.execute('''INSERT INTO books VALUES(not null, "Harry Potter and the Prisoner of Azkaban", "JK Rowling", 1999, 2, "No")''')
+    cur.execute('''INSERT INTO books VALUES(not null, "Harry Potter and the Goblet of Fire", "JK Rowling", 2001, 1, "No")''')
+    cur.execute('''INSERT INTO books VALUES (not null, "The Lion, the Witch, and the Wardrobe", "C.S. Lewis", 1950, 2, "No")''')
+    cur.execute('''INSERT INTO books VALUES (not null, "Prince Caspian", "C.S. Lewis", 1951, 1, "No")''')
+    cur.execute('''INSERT INTO books VALUES (not null, "The Last Battle", "C.S. Lewis", 1956, 3, "No")''')
+    cur.execute('''INSERT INTO customers VALUES(not null, "Chen Harel", "Rehovot", 30)''')
+    cur.execute('''INSERT INTO customers VALUES(not null, "Noya Nahum", "Rehovot", 27)''')
+    cur.execute('''INSERT INTO customers VALUES(not null, "Yaron Ziv ", "Jerusalem", 23)''')
+    con.commit()
+#addData()
 
 app=Flask(__name__)
 
@@ -79,18 +92,17 @@ def loanBook():
 #Show all loaned books
 @app.route("/loans/showAllLoans", methods=['GET', 'POST'])
 def showAllLoans():
-    if request.method=="POST":
-        pass
-    findAllLoans = '''SELECT * FROM loans'''
-    cur.execute(findAllLoans)
-    allLoans = cur.fetchall()
-    return render_template("/loans/showAllLoans.html", allLoans=allLoans)
+    return myLoans.Loan.showAllLoans(myLoans)
 
 #Show all LATE loans
 @app.route("/loans/showAllLateLoans")
 def showAllLateLoans():
     return render_template("/loans/showAllLateLoans.html")
 
+# cur.execute('''drop table books''')
+# cur.execute('''drop table customers''')
+# cur.execute('''drop table loans''')
+# con.commit()
 
 if __name__=="__main__":
     app.run(debug=True)

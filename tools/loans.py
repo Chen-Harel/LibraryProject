@@ -1,5 +1,8 @@
-from flask import redirect, render_template, request
+from flask import render_template, request
 import sqlite3
+import datetime
+
+from tools.books import Book
 
 
 con=sqlite3.connect("library.db", check_same_thread=False)
@@ -10,7 +13,12 @@ class Loan:
         pass
 
     def showAllLoans(self):
-        pass
+        if request.method=="POST":
+            pass
+        findAllLoans = '''SELECT * FROM loans'''
+        cur.execute(findAllLoans)
+        allLoans = cur.fetchall()
+        return render_template("/loans/showAllLoans.html", allLoans=allLoans)
 
     def loanBook(self):
         if request.method=="POST":
@@ -20,6 +28,8 @@ class Loan:
             expectedReturn=request.form.get("expectedReturn")
             sql=(f'''INSERT INTO loans VALUES("{customerName}", "{bookName}", "{loanDate}", "{expectedReturn}")''')
             cur.execute(sql)
+            # remSQL=(f'''DELETE FROM books WHERE bookName="{bookName}"''')
+            # cur.execute(remSQL)
             con.commit()
             return render_template("/loans/loanBook.html")
         return render_template("/loans/loanBook.html")
