@@ -37,7 +37,7 @@ class Customer:
             cRem="Customer removed!"
             goToBookDatabase="Click here"
             goBack="to go back."
-            return redirect("/customers/removeCustomer.html", cRem=cRem, goToBookDatabase=goToBookDatabase, goBack=goBack)
+            return render_template("/customers/removeCustomer.html", cRem=cRem, goToBookDatabase=goToBookDatabase, goBack=goBack)
         return render_template("/customers/removeCustomer.html")
     
     def findCustomer(self):

@@ -12,6 +12,7 @@
             <th>Author</th>
             <th>YearPublished</th>
             <th>bookType</th>
+            <th>isAvailable</th>
         </tr>
         {% for book in books %}
         <tr>
@@ -20,6 +21,7 @@
             <td>{{book[2]}}</td>
             <td>{{book[3]}}</td>
             <td>{{book[4]}}</td>
+            <td>{{book[5]}}</td>
         </tr>
         {% endfor %}
     </table>

@@ -1,6 +1,6 @@
 from flask import render_template, request
 import sqlite3
-
+from consts import bookName
 
 con=sqlite3.connect("library.db", check_same_thread=False)
 cur=con.cursor()
@@ -15,7 +15,8 @@ class Book:
             bAuthor = request.form.get('Author')
             bYear = request.form.get('yearPublished')
             bType = request.form.get('bookType')
-            cur.execute(f'''INSERT INTO books VALUES(not null,"{bName}", "{bAuthor}", {int(bYear)}, {int(bType)})''')
+            isLoaned=request.form.get('isLoaned')
+            cur.execute(f'''INSERT INTO books VALUES(not null,"{bName}", "{bAuthor}", {int(bYear)}, {int(bType)}, "{isLoaned}")''')
             con.commit()
         return render_template("/books/addBook.html")
 

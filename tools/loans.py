@@ -1,6 +1,5 @@
 from flask import render_template, request
 import sqlite3
-import datetime
 
 from tools.books import Book
 
@@ -25,11 +24,13 @@ class Loan:
             customerName=request.form.get("customerName")
             bookName=request.form.get("bookName")
             loanDate=request.form.get("loanDate")
-            expectedReturn=request.form.get("expectedReturn")
-            sql=(f'''INSERT INTO loans VALUES("{customerName}", "{bookName}", "{loanDate}", "{expectedReturn}")''')
-            cur.execute(sql)
-            # remSQL=(f'''DELETE FROM books WHERE bookName="{bookName}"''')
-            # cur.execute(remSQL)
+            returnDate=request.form.get("returnDate")
+            sql=(f'''INSERT INTO loans (cusID, bookID) SELECT customers.customerID, books.bookID FROM customers, books WHERE customers.cusName="{customerName}" and books.bookName="{bookName}"''')
+            dateSQL=(f'''INSERT INTO loans (loanDate, returnDate) VALUES ("{loanDate}","{returnDate}")''')
+            #updateDate=(f'''UPDATE loans SET loanDate="{loanDate}", returnDate="{returnDate}" WHERE ''')
+            cur.executemany(sql, dateSQL)
+            updateSQL=(f'''UPDATE books SET inStock="No" WHERE bookName="{bookName}"''')
+            cur.execute(updateSQL)
             con.commit()
             return render_template("/loans/loanBook.html")
         return render_template("/loans/loanBook.html")
@@ -38,8 +39,8 @@ class Loan:
         if request.method=="POST":
             customerName=request.form.get("customerName")
             bookName=request.form.get("bookName")
-            returnSQL=(f'''DELETE FROM loans WHERE cusID="{int(customerName)}" and bookID="{int(bookName)}"''')
-            cur.execute(returnSQL)
+            removeSQL=(f'''DELETE FROM loans WHERE cusID="{int(customerName)}" and bookID="{int(bookName)}"''')
+            cur.execute(removeSQL)
             con.commit()
             return render_template("/books/returnBook.html")
         return render_template("/books/returnBook.html")
