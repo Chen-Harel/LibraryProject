@@ -13,16 +13,14 @@
         <br>
         <input type="text" name="customerName" required>
         <br><br>
-        <label>Loan date:</label>
-        <br>
-        <input type="date" name="loanDate" required>
-        <br><br>
-        <label>Return date:</label>
-        <br>
-        <input type="date" name="returnDate" required>
-        <br><br>
         <button type="submit">Submit</button>
     </form>
+</div>
+
+<div class="pushLeft">
+    <h1>{{customerMessage}}</h1>
+    <h1>{{bookMessage}}</h1>
+    <h1>{{bookIsLoaned}}</h1>
 </div>
 
 {%endblock%}

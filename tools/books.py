@@ -1,6 +1,5 @@
 from flask import render_template, request
 import sqlite3
-from consts import bookName
 
 con=sqlite3.connect("library.db", check_same_thread=False)
 cur=con.cursor()

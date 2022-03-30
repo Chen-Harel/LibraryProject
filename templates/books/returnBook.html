@@ -6,17 +6,20 @@
 
 <div class="pushLeft">
     <form action="/books/returnBook" method="POST">
-        <label>Customer ID:</label>
+        <label>Customer name:</label>
         <br>
-        <input type="text" required autofocus>
+        <input type="text" name="customerName" required autofocus>
         <br><br>
-        <label>Book ID:</label>
+        <label>Book name:</label>
         <br>
-        <input type="text" required>
+        <input type="text" name="bookName" required>
         <br><br>
         <button type="submit">Return book</button>
     </form>
 </div>
-
+<br><br>
+<div class="pushLeft">
+    <h1>{{returnMsg}}</h1>
+</div>
 {%endblock%}
 {%block footer%}{{super()}}{%endblock%}

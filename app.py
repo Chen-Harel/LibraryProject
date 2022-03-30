@@ -101,7 +101,7 @@ def showAllLoans():
 #Show all LATE loans
 @app.route("/loans/showAllLateLoans")
 def showAllLateLoans():
-    return render_template("/loans/showAllLateLoans.html")
+    return myLoans.Loan.showLateLoans(myLoans)
 
 # cur.execute('''drop table books''')
 # cur.execute('''drop table customers''')
