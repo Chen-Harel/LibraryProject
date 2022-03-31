@@ -5,6 +5,8 @@ Note that every book has it's own "type", either 1, 2, or 3. Book types are the 
 
 There is only one version of each book so once a certain book is loaned it cannot be loaned again until it has been returned. There is no "late fee" like there is in a real library. The only thing that happens if a book is returned late is a message will appear telling that how much they are overdue on that book (Work in progress).
 
-When you first open the site there will be no data in any of the tables. To add data simply click on the "Add data" link near the center of the page and data will be added to the tables. Keep in mind that the data being added is the same each time so if you click on the link multiple times duplicates will be formed and will most likely cause problems. #Make sure to add data only once!
+When you first open the site there will be no data in any of the tables. To add data simply click on the "Add data" link near the center of the page and data will be added to the tables. Keep in mind that the data being added is the same each time so if you click on the link multiple times duplicates will be formed and will most likely cause problems. 
+
+# Make sure to add data only once!
 
 I will be adding a button to delete the database soon...
