@@ -9,6 +9,6 @@ When you first open the site there will be no data in any of the tables. To add 
 
 # Make sure to add data only once!
 
-~~I will be adding a button to delete the database soon... SQLite3 doesn't have an option to delete the database via code. It stores it as a file on the computer. In order to delete it you have to manually delete the file from your computer after closing the program. ~~
+~~I will be adding a button to delete the database soon...~~ ~~SQLite3 doesn't have an option to delete the database via code. It stores it as a file on the computer. In order to delete it you have to manually delete the file from your computer after closing the program.~~
 
 I made it possible to remove all data from ALL tables. Simply click the link "Delete all data" and all the tables will be reset.
