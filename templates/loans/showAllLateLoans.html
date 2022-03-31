@@ -15,9 +15,17 @@
             <th>Loan Date</th>
             <th>Return Date</th>
         </tr>
+        {%for book in lateList%}
+        <tr>
+            <td>{{book[0]}}</td>
+            <td>{{book[1]}}</td>
+            <td>{{book[2]}}</td>
+            <td>{{book[3]}}</td>
+            <td>{{book[4]}}</td>
+        </tr>
+        {%endfor%}
     </table>
 </div>
-
 
 {%endblock%}
 {%block footer%}{{super()}}{%endblock%}
