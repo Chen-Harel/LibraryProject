@@ -11,13 +11,36 @@
     {%endblock%}
 </head>
 {%block navbar%}
-<div class="topnav">
+<div class="navbar">
     <a class="active" href="/">Home</a>
-    <a href="/books/showAllBooks">Books</a>
-    <a href="/customers/showAllCustomers">Customers</a>
-    <a href="/loans/showAllLoans">Loans</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
+    <div class="subnav">
+        <button class="subnavbtn">Books</button>
+        <div class="subnav-content">
+            <a class="pushLeft" href="/books/showAllBooks">Show all books</a>
+            <a class="pushLeft" href="/books/findBook">Find a certain book</a>
+            <a class="pushLeft" href="/books/addBook">Add a book</a>
+            <a class="pushLeft" href="/books/removeBook">Remove a book from the library</a>
+            <a class="pushLeft" href="/books/returnBook">Return a loaned book</a>
+        </div>
+    </div>
+    <div class="subnav">
+        <button class="subnavbtn">Customers</button>
+        <div class="subnav-content">
+            <a class="pushLeft" href="/customers/showAllCustomers">Show all customers in the library</a>
+            <a class="pushLeft" href="/customers/addCustomer">Add customer to library</a>
+            <a class="pushLeft" href="/customers/findCustomer">Search for customer</a>
+            <a class="pushLeft" href="/customers/removeCustomer">Remove customer from library</a>
+        </div>
+    </div>
+    <div class="subnav">
+        <button class="subnavbtn">Loans</button>
+        <div class="subnav-content">
+            <a class="pushLeft" href="/loans/showAllLoans">Show all loans from library</a>
+            <a class="pushLeft" href="/loans/loanBook">Loan a book</a>
+            <a class="pushLeft" href="/loans/showAllLateLoans">Show all late loans</a>
+        </div>
+    </div>
+    <a href="#contact">Contact</a>
 </div>
 {%endblock%}
 {%block content%}
