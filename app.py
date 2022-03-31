@@ -4,8 +4,7 @@ import tools.books as myBooks
 import tools.customers as myCustomers
 import tools.loans as myLoans
 from tools.addData import addData as myData
-import os
-
+from tools.addData import deleteData as myDelete
 
 con=sqlite3.connect("library.db", check_same_thread=False)
 cur=con.cursor()
@@ -31,12 +30,15 @@ def index():
 def addData():
     return myData()
 
+@app.route("/deleteData")
+def deleteData():
+    return myDelete()
+
 #Add book page
 @app.route("/books/addBook", methods=['GET', 'POST'])
 def addBook():
     return myBooks.Book.addBook(myBooks)
     
-
 #Show returned books page
 @app.route("/books/returnBook", methods=['GET', 'POST'])
 def returnBook():
@@ -93,4 +95,4 @@ def showAllLateLoans():
     return myLoans.Loan.showLateLoans(myLoans)
 
 if __name__=="__main__":
-    app.run()
+    app.run(debug="True")

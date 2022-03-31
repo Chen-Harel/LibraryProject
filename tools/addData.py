@@ -19,3 +19,10 @@ def addData():
     cur.execute('''INSERT INTO customers VALUES(not null, "Tom Holland", "England", 20)''')
     con.commit()
     return render_template("/index.html")
+
+def deleteData():
+    cur.execute('''DELETE FROM books''')
+    cur.execute('''DELETE FROM customers''')
+    cur.execute('''DELETE FROM loans''')
+    con.commit()
+    return render_template("/index.html")
