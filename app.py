@@ -4,6 +4,7 @@ import tools.books as myBooks
 import tools.customers as myCustomers
 import tools.loans as myLoans
 from tools.addData import addData as myData
+import os
 
 
 con=sqlite3.connect("library.db", check_same_thread=False)
@@ -91,10 +92,5 @@ def showAllLoans():
 def showAllLateLoans():
     return myLoans.Loan.showLateLoans(myLoans)
 
-# cur.execute('''drop table books''')
-# cur.execute('''drop table customers''')
-# cur.execute('''drop table loans''')
-# con.commit()
-
 if __name__=="__main__":
-    app.run(debug=True)
+    app.run()
